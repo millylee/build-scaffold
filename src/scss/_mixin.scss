@@ -1,0 +1,53 @@
+$base-width:72;
+
+@function rem($original-width) {
+  @return ($original-width/$base-width) + rem;
+}
+
+@mixin bgSize($size) {
+    background-size: $size;
+    -webkit-background-size: $size;
+}
+
+@mixin radius($radius) {
+    border-radius: $radius;
+    -webkit-border-radius: $radius;
+}
+
+@mixin transition($tran) {
+    transition: $tran;
+    -webkit-transition: $tran;
+}
+
+@mixin transform($tran) {
+    transform: $tran;
+    -webkit-transform: $tran;
+}
+
+@mixin multiEllipsis($row) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: $row;
+    -webkit-box-orient: vertical;
+}
+
+@mixin clearfix {
+    &:after {
+        content: "";
+        display: block;
+        clear: both;
+        height: 0;
+        overflow: hidden;
+    }
+}
+
+@mixin triangle($rotate) {
+    -webkit-transform:rotate($rotate) translateZ(0);
+            transform:rotate($rotate) translateZ(0);
+}
+
+@mixin translateY($rotate) {
+    -webkit-transform:translateY($rotate);
+            transform:translateY($rotate);
+}

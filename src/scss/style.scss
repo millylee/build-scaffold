@@ -1,0 +1,17 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.aa {
+	background-color: #fff;
+	color: #000;
+	@at-root .bb {
+		background-color: #aaa;
+	}
+}
+
+.test {
+	border-radius: 1px;
+	animation: aa 1s 2s;
+	background-clip: ad;
+}
