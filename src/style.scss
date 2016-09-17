@@ -1,0 +1,19 @@
+@import 'core/media-queries';
+
+.aa {
+    width: 100px;
+    height: 200px;
+    background: #000;
+}
+
+@include iphone6() {
+    .aa {
+        background: red;
+    }
+}
+
+@include iphone5() {
+    .aa {
+        background: blue;
+    }
+}

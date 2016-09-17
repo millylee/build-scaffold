@@ -1,0 +1,104 @@
+//==================================================
+// reset
+//==================================================
+body, blockquote, dl, dd, h1, h2, h3, h4, h5, h6, p, pre, form {
+    margin: 0;
+}
+
+ul, ol, fieldset {
+    margin: 0;
+    padding: 0;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+td,
+th {
+    padding: 0;
+}
+
+button, input, optgroup, select, textarea {
+    color: inherit; // Correct color not being inherited.
+    font: inherit; // Correct font properties not being inherited.
+    margin: 0; // Address margins set differently in Firefox 4+, Safari, and Chrome.
+    vertical-align: middle;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-size: 18px;
+    font-weight: normal;
+}
+
+// use for icon
+i {
+    font-style: normal;
+}
+
+// Embedded content
+//-----------------------------------------------------
+// 1. Remove border when inside `a` element in IE 8/9/10.
+img {
+    border: 0; // 1
+    vertical-align: middle;
+    max-width: 100%;
+}
+
+// HTML5 display definitions
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section,
+summary {
+  display: block;
+}
+
+// Correct `inline-block` display not defined in IE 9-.
+audio,
+canvas,
+progress,
+video {
+    display: inline-block;
+}
+
+// Prevent modern browsers from displaying `audio` without controls.
+// Remove excess height in iOS 5 devices.
+audio:not([controls]) {
+    display: none;
+    height: 0;
+}
+
+// Add the correct vertical alignment in Chrome, Firefox, and Opera.
+progress {
+    vertical-align: baseline;
+}
+
+body {
+    font-size: $baseFontSize;
+    color: $baseBodyColor;
+    background-color: $baseBodyBackground;
+}
+
+a {
+    background: transparent; // Remove the gray background color from active links in IE 10.
+    text-decoration: none;
+    color: $baseColorLink;
+
+    &:active {
+        outline: 0; // Improve readability when focused and also mouse hovered in all browsers.
+    }
+}
