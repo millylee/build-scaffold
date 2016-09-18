@@ -11,9 +11,11 @@
     "del": "^2.2.2",
     "gulp": "github:gulpjs/gulp#4.0",
     "gulp-babel": "^6.1.2",
+    "gulp-header": "^1.8.8",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.3.2",
-    "gulp-ssi": "^0.1.2"
+    "gulp-ssi": "^0.1.2",
+    "moment": "^2.15.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

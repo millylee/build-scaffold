@@ -5,12 +5,25 @@ const babel = require('gulp-babel');
 const sass = require('gulp-sass');
 const ssi = require('gulp-ssi');
 const rename = require('gulp-rename');
+const header = require('gulp-header');
 const bs = require('browser-sync');
 const del = require('del');
 const config = require('./config');
 
+const pkg = require('./package.json');
+const moment = require('moment');
+pkg.date = moment().format('YYYY-MM-DD');
+
+// header 信息
+var banner = ['/**',
+    ' * @fileoverview <%= pkg.name %>',
+    ' * @author <%= pkg.author %>',
+    ' * @date <%= pkg.date %>',
+    ' */',
+    ''].join('\n');
+
 // 实时刷新
-var reloadHandler = function () {
+const reloadHandler = function () {
     bs.create().reload();
 };
 
@@ -36,6 +49,7 @@ function compileSHTML() {
 function compileJS() {
     return gulp.src(config.src.js)
         .pipe(babel())
+        .pipe(header(banner, {pkg : pkg}))
         .pipe(gulp.dest(config.dest.dir))
         .on('data', function () {
         })
@@ -47,6 +61,7 @@ function compileSass() {
     return gulp.src(config.src.scss)
         .pipe(sass())
         .on('error', sass.logError)
+        .pipe(header(banner, {pkg : pkg}))
         .pipe(gulp.dest(config.dest.dir))
         .on('data', function () {
         })
