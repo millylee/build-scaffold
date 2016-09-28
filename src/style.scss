@@ -1,18 +1,22 @@
 @import 'core/media-queries';
 
+:fullscreen a {
+    display: flex
+}
+
 .aa {
     width: 100px;
-    height: 200px;
+    height: 100px;
     background: #000;
 }
 
 @include iphone6() {
     .aa {
-        background: red;
+        background: #ddd;
     }
 }
 
-@include iphone5() {
+@include iphone4() {
     .aa {
         background: blue;
     }

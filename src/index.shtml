@@ -2,12 +2,11 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>标题</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <title>标题1</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="aa"></div>
 <!--#include file="include.html" -->
-<script src="index.js"></script>
 </body>
 </html>

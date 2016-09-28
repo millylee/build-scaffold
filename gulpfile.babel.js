@@ -3,10 +3,16 @@
 const gulp = require('gulp');
 const babel = require('gulp-babel');
 const sass = require('gulp-sass');
+const autoprefixer = require('gulp-autoprefixer');
+const cssnano = require('gulp-cssnano');
 const ssi = require('gulp-ssi');
 const rename = require('gulp-rename');
 const header = require('gulp-header');
-const bs = require('browser-sync');
+const watch = require('gulp-watch');
+const filter = require('gulp-filter');
+const clean = require('gulp-clean');
+const uglify = require('gulp-uglify');
+const bs = require('browser-sync').create();
 const del = require('del');
 const config = require('./config');
 
@@ -15,8 +21,8 @@ const moment = require('moment');
 pkg.date = moment().format('YYYY-MM-DD');
 
 // header 信息
-var banner = ['/**',
-    ' * @fileoverview <%= pkg.name %>',
+var banner = ['/*!',
+    ' * <%= pkg.name %>',
     ' * @author <%= pkg.author %>',
     ' * @date <%= pkg.date %>',
     ' */',
@@ -24,7 +30,9 @@ var banner = ['/**',
 
 // 实时刷新
 const reloadHandler = function () {
-    bs.create().reload();
+    gulp.watch(config.src.shtml, compileSHTML);
+    gulp.watch(config.src.js, compileJS);
+    gulp.watch(config.src.scss, compileSass);
 };
 
 // 清除构建目录
@@ -40,9 +48,10 @@ function compileSHTML() {
             extname: '.html'
         }))
         .pipe(gulp.dest(config.dest.dir))
+        .pipe(bs.stream())
         .on('data', function () {
         })
-        .on('end', reloadHandler)
+        .on('end', reloadHandler);
 }
 
 // compile javascript
@@ -50,10 +59,12 @@ function compileJS() {
     return gulp.src(config.src.js)
         .pipe(babel())
         .pipe(header(banner, {pkg : pkg}))
+        .pipe(uglify({preserveComments: 'license'}))
         .pipe(gulp.dest(config.dest.dir))
+        .pipe(bs.stream())
         .on('data', function () {
         })
-        .on('end', reloadHandler)
+        .on('end', reloadHandler);
 }
 
 // compile sass
@@ -61,41 +72,27 @@ function compileSass() {
     return gulp.src(config.src.scss)
         .pipe(sass())
         .on('error', sass.logError)
+        .pipe(autoprefixer(config.autoprefixer.browsers))
         .pipe(header(banner, {pkg : pkg}))
+        .pipe(cssnano())
         .pipe(gulp.dest(config.dest.dir))
+        .pipe(bs.stream())
         .on('data', function () {
         })
-        .on('end', reloadHandler)
+        .on('end', reloadHandler);
 }
 
-// 实时刷新
+// 启动服务
 function startServer() {
     bs.init({
         server: config.dest.dir,
-        port: 8080,
+        port: config.domain.port,
         startPath: './',
-        reloadDelay: 0,
-        notify: {
-            styles: [
-                "margin: 0",
-                "padding: 5px",
-                "position: fixed",
-                "font-size: 10px",
-                "z-index: 9999",
-                "bottom: 0px",
-                "right: 0px",
-                "border-radius: 0",
-                "border-top-left-radius: 5px",
-                "background-color: rgba(60,197,31,0.5)",
-                "color: white",
-                "text-align: center"
-            ]
-        }
+        open: true,
     });
 }
 
-
-//注册 build_dev 任务
+// 注册 build dev 任务
 gulp.task('default', gulp.series(
     cleanDev,
     gulp.parallel(
