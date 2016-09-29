@@ -1,0 +1,23 @@
+@import 'core/media-queries';
+
+:fullscreen a {
+    display: flex
+}
+
+.aa {
+    width: 200px;
+    height: 200px;
+    background: #f00;
+}
+
+@include iphone6() {
+    .aa {
+        background: #ddd;
+    }
+}
+
+@include iphone4() {
+    .aa {
+        background: blue;
+    }
+}

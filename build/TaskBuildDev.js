@@ -14,14 +14,14 @@ const clean = require('gulp-clean');
 const uglify = require('gulp-uglify');
 const bs = require('browser-sync').create();
 const del = require('del');
-const config = require('./config');
+const config = require('../config');
 
-const pkg = require('./package.json');
+const pkg = require('../package.json');
 const moment = require('moment');
 pkg.date = moment().format('YYYY-MM-DD');
 
 // header 信息
-var banner = ['/*!',
+const banner = ['/*!',
     ' * <%= pkg.name %>',
     ' * @author <%= pkg.author %>',
     ' * @date <%= pkg.date %>',
@@ -93,7 +93,7 @@ function startServer() {
 }
 
 // 注册 build dev 任务
-gulp.task('default', gulp.series(
+gulp.task('build-dev', gulp.series(
     cleanDev,
     gulp.parallel(
         compileSHTML,

@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>标题2</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="aa"></div>
+<!--#include file="include.html" -->
+</body>
+</html>
